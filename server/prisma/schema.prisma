@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Add models here
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int         @id @default(autoincrement())
+  name            String
+  messages        Message[]     
+}
+
+model Message {
+  id              Int         @id @default(autoincrement())
+  sentUserId      Int
+  receiverUserId  Int
+  sentBy          User        @relation(fields: [sentUserId], references: [id]) // get clarification on error referencing the relationship issue
+  receivedBy      User        @relation(fields: [receiverUserId], references: [id]) // get clarification on error referencing the relationship issue
+}

@@ -1,0 +1,19 @@
+type Query {
+    users: [User!]!
+    user(id: ID!): User
+    messages: [Message!]!
+}
+
+type Mutation {
+
+}
+
+type Message {
+
+}
+
+type User {
+    id: ID!
+    name: String!
+    messages: [Message]!
+}
